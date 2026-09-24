@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS
+   Sistema de estudos — todas as cores, raios e fontes vivem
+   aqui. Para trocar a identidade visual da plataforma inteira,
+   altere apenas os valores abaixo.
+   ============================================================ */
+/*
+ * DIREÇÃO DE ARTE — REVISÃO DE MATEMÁTICA
+ * (Matrizes, Álgebra Matricial e Geometria Analítica)
+ *
+ * Conceito: precisão, estrutura e grid. A paleta parte de um azul
+ * índigo profundo (lógica, exatidão) sobre um fundo "papel
+ * milimetrado" (levemente frio, muito claro). Um âmbar/cobre
+ * discreto marca destaques — como uma anotação feita à caneta
+ * sobre uma folha quadriculada. Cantos mais retos que o padrão
+ * genérico da plataforma reforçam a sensação de grade/geometria.
+ */
+@theme {
+  --font-display: var(--font-space-grotesk), "Segoe UI", sans-serif;
+  --font-sans: var(--font-inter), "Segoe UI", sans-serif;
+
+  /* Fundo e superfícies — "papel milimetrado" */
+  --color-bg: #f3f5f8;
+  --color-surface: #ffffff;
+  --color-surface-muted: #edf1f6;
+  --color-surface-sunken: #e6ebf3;
+
+  /* Texto — tinta azul-marinho */
+  --color-ink: #141b2e;
+  --color-ink-soft: #47506a;
+  --color-ink-faint: #8a92a8;
+
+  /* Bordas */
+  --color-border: #dce2ec;
+  --color-border-strong: #c0c9db;
+
+  /* Marca — índigo (precisão, lógica) */
+  --color-brand: #223a70;
+  --color-brand-strong: #172746;
+  --color-brand-soft: #e6ebf7;
+  --color-brand-contrast: #f6f8fc;
+
+  /* Destaque secundário — âmbar/cobre (anotação, correção) */
+  --color-accent: #b56a1f;
+  --color-accent-soft: #f6ead6;
+
+  /* Estados */
+  --color-success: #2f7d5e;
+  --color-success-soft: #e3f1ea;
+  --color-error: #b0433a;
+  --color-error-soft: #f8e6e3;
+  --color-warning: #ad7a15;
+  --color-warning-soft: #f6ecd6;
+
+  --radius-card: 0.85rem;
+  --radius-control: 0.55rem;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-optical-sizing: auto;
+}
+
+/* Matemática (KaTeX) — alinhamento fino com a tipografia da plataforma */
+.katex-inline {
+  font-size: 1em;
+}
+.katex-display-block {
+  padding: 0.35rem 0;
+}
+.katex-display-block .katex-display {
+  margin: 0;
+}
+
+/* Motivo decorativo discreto: grade milimetrada, usada só no Hero */
+.bg-grid-paper {
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+::selection {
+  background-color: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scrollbar discreta */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+}
+
+/* Utilitário para evitar overflow horizontal acidental */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Flip card (flashcards) */
+.flip-scene {
+  perspective: 1600px;
+}
+.flip-card {
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+}
+.flip-face-back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
